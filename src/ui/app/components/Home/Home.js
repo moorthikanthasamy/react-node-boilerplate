@@ -1,5 +1,4 @@
 import React from "react";
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class Home extends React.Component {
   render() {
@@ -13,7 +12,7 @@ class Home extends React.Component {
           </head>
           <body>
             <div id="root" />
-            <script src="1.client-bundle.js" type="text/javascript" defer />
+
             <script src="client-bundle.js" type="text/javascript" defer />
           </body>
         </html>
