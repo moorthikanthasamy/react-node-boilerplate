@@ -10,7 +10,7 @@ app.use(router);
 app.get("/", (req, res) => res.send(`I'm from server`));
 app.post("/md5hash", (req, res) => {
   const { data } = req.body;
-  const hashValue = data ? md5(data) : "Invalid Input";
-  res.send({ hash: hashValue });
+  const hashValue = data ? { hash: md5(data) } : { error: "Invalid Input" };
+  res.send(hashValue);
 });
 app.listen(3000, () => console.log("Server Running at 3000"));

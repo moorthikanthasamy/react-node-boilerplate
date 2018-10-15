@@ -15,12 +15,12 @@ const clientConfig = {
     new MiniCssExtractPlugin({
       filename: "style.css"
     })
-    //   new WebpackMonitor({
-    //     capture: true,
-    //     target: "../WebpackMonitor/myStatsStore.json",
-    //     launch: false,
-    //     port: 3030
-    //   })
+    //, new WebpackMonitor({
+    //   capture: true,
+    //   target: "../WebpackMonitor/myStatsStore.json",
+    //   launch: false,
+    //   port: 3030
+    // }),
   ],
   module: {
     rules: [
@@ -42,6 +42,17 @@ const clientConfig = {
     net: "empty",
     tls: "empty"
   },
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         chunks: "initial",
+  //         test: /[\\/]node_modules[\\/]/,
+  //         name: "vendors"
+  //       }
+  //     }
+  //   }
+  // },
   resolve: {
     alias: {
       react: path.resolve(
