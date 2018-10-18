@@ -5,7 +5,8 @@
       "syntax-dynamic-import",
       {
         "libraryName": "antd",
-        "style": "css"
+        "style": "css",
+        "libraryDirectory": "es"
       }
     ],
     ["@babel/plugin-proposal-class-properties"]

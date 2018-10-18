@@ -1,8 +1,9 @@
 import React from "react";
-import "../../../assets/css/style.css";
-import "antd/dist/antd.css";
+import { connect } from "react-redux";
 
-import { Input, Button } from "antd";
+
+import Input from "antd/lib/input";
+import Button from "antd/lib/button";
 
 class Header extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Header extends React.Component {
     }).then(res => res.json());
     hashValue.then(value => {
       const response = value.hash ? value.hash : value.error;
+      this.props.dispatchHash(response);
       this.setState({ hashValue: response });
       this.setState({ loading: false });
     });
@@ -38,7 +40,8 @@ class Header extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment>      
+        <div>{this.props.user.username}</div>
         <Input placeholder="Basic usage" onChange={this.setValue} />
         <Button
           type="primary"
@@ -52,4 +55,23 @@ class Header extends React.Component {
     );
   }
 }
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.reducer
+  };
+};
+
+const mapStateToDispatch = dispatch => {
+  return {
+    dispatchHash: hash =>
+      dispatch({
+        type: "ADD",
+        payload: hash
+      })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapStateToDispatch
+)(Header);

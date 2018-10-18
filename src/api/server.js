@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("./"));
 app.use(router);
-app.get("/", (req, res) => res.send(`I'm from server`));
+// app.get("/", (req, res) => res.send(`I'm from server`));
 app.post("/md5hash", (req, res) => {
   const { data } = req.body;
   const hashValue = data ? { hash: md5(data) } : { error: "Invalid Input" };
