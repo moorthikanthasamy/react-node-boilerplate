@@ -5,15 +5,13 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <html>
-          <title> React Sample App</title>
+          <title> Utilty Manager</title>
           <head>
-            Welcome to React App
-            <link rel="stylesheet" href="style.css" />
+            <link rel="stylesheet" href="dist/style.css" />
           </head>
           <body>
             <div id="root" />
-
-            <script src="client-bundle.js" type="text/javascript" defer />
+            <script src="dist/client-bundle.js" type="text/javascript" defer />
           </body>
         </html>
       </React.Fragment>

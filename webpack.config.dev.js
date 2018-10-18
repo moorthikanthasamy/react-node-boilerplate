@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack=require('webpack');
 const nodeExternals = require("webpack-node-externals");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const WebpackMonitor = require("webpack-monitor");
@@ -12,8 +13,10 @@ const clientConfig = {
   },
 
   plugins: [
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/),
     new MiniCssExtractPlugin({
-      filename: "style.css"
+      filename: "style.css",
+      chunkFilename: "[id].css"
     })
     //, new WebpackMonitor({
     //   capture: true,
@@ -55,6 +58,7 @@ const clientConfig = {
   // },
   resolve: {
     alias: {
+      moment: `moment/moment.js`,
       react: path.resolve(
         __dirname,
         "node_modules/react/umd/react.development.js"
