@@ -1,48 +1,57 @@
 import React from "react";
 import Input from "antd/lib/input";
-import Icon from "antd/lib/icon";
+import Button from "antd/lib/button";
 import "../../../../assets/css/style.css";
 import { Row, Col } from "antd";
 class Md5Component extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ""
+      loading: false,
+      iconLoading: false,
+      dataToHash: null,
+      hashValue: ""
     };
   }
-
-  emitEmpty = () => {
-    this.userNameInput.focus();
-    this.setState({ userName: "" });
+  setValue = e => {
+    this.setState({ dataToHash: e.target.value });
   };
-
-  onChangeUserName = e => {
-    this.setState({ userName: e.target.value });
+  enterLoading = () => {
+    this.setState({ loading: true });
+    const hashValue = fetch("http://localhost:3000/md5hash", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        data: this.state.dataToHash
+      })
+    }).then(res => res.json());
+    hashValue.then(value => {
+      const response = value.hash ? value.hash : value.error;
+      this.setState({ hashValue: response });
+      this.setState({ loading: false });
+    });
   };
-
   render() {
-    const { userName } = this.state;
-    const suffix = userName ? (
-      <Icon type="close-circle" onClick={this.emitEmpty} />
-    ) : null;
     return (
-      <div>
-        <Row>
-          <Col span={6}>
-            <Input
-              placeholder="Enter your username"
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              suffix={suffix}
-              value={userName}
-              onChange={this.onChangeUserName}
-              ref={node => (this.userNameInput = node)}
-            />
-          </Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-          <Col span={6}>col-6</Col>
-        </Row>
-      </div>
+      <Row gutter={8}>
+        <Col span={6}>
+          <Input placeholder="Enter value to hash" onChange={this.setValue} />
+        </Col>
+        <Col span={6}>
+          <Button
+            type="primary"
+            loading={this.state.loading}
+            onClick={this.enterLoading}
+          >
+            Get hash
+          </Button>
+        </Col>
+        <Col span={3}>{this.state.hashValue}</Col>
+        <Col span={9} />
+      </Row>
     );
   }
 }
