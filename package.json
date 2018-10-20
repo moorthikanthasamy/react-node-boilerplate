@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon node_modules/@babel/node/bin/babel-node.js src/api/server.js",
+    "start-dev": "nodemon node_modules/@babel/node/bin/babel-node.js src/api/server.js",
     "build": "webpack -w --config webpack.config.dev.js",
-    "start-dev": "nodemon dist/server-bundle.js"
+    "start": "nodemon dist/server-bundle.js"
   },
   "author": "",
   "license": "ISC",
